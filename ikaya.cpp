@@ -20,6 +20,7 @@ using namespace std;
         cout << "-------------------" << endl;
         cout<<": \n";
         cout<<"======  Index number: "<<e.index<<"  ======="<<endl;
+        cout<<"Entrez le nom de l'étudiant: ";
         cin>>e.nom;
         cout<<"Entrez l'âge de l'étudiant: ";
         cin>>e.age;
@@ -30,6 +31,12 @@ using namespace std;
     }
 
     void afficherEtudiants(const vector<etudiant>& list){
+        if (list.empty())
+        {
+            cout << "--------------La liste des étudiants est vide.-----------------" << endl;
+            return;
+        }
+        
         cout << "Liste des étudiants:" << endl;
         for (const auto& e : list) {
             cout << "ID number: " << e.index << " | Nom: " << e.nom << ", Age: " << e.age << ", Moyenne: " << e.moyenne << endl;
@@ -39,14 +46,14 @@ using namespace std;
     void trierEtudiantsParMoyenne(vector<etudiant>& list){
         if (list.empty())
         {
-            cout << "La liste des étudiants est vide." << endl;
+            cout << "--------------La liste des étudiants est vide.-----------------" << endl;
             return;
         }
         
         sort(list.begin(), list.end(), [](const etudiant& a, const etudiant& b) {
             return a.moyenne > b.moyenne;
         });
-        cout << "Étudiants triés par moyenne décroissante." << endl;
+        cout << "\nÉtudiants triés par moyenne décroissante." << endl;
         for (size_t i = 0; i < list.size(); i++)
         {
             cout << i + 1 << ". ID: " << list[i].index << " | Nom: " << list[i].nom << ", Age: " << list[i].age << ", Moyenne: " << list[i].moyenne << endl;
@@ -55,7 +62,7 @@ using namespace std;
     }   
     void rechercherEtudiantParNom(const vector<etudiant>& list){
         string nomRecherche;
-        cout<<"Entrez le nom de l'étudiant à rechercher: ";
+        cout<<"\nEntrez le nom de l'étudiant à rechercher: ";
         cin>>nomRecherche;
         bool trouve = false;
         for (const auto& e : list) {
